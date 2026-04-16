@@ -1,0 +1,145 @@
+Artificial Neural Networks 2025/2026 
+Faculty of Exact Sciences and Engineering 
+First Assignment 
+Feature Analysis and Engineering 
+Objective: 
+Explore, clean, transform, and engineer features from the Gold_data.csv dataset. In this 
+assignment, students must use Close as the target variable and treat the remaining 
+variables as input features. The focus is on understanding and documenting each step  of 
+preprocessing, transformation, selection, and engineering, rather than building a full 
+predictive model. 
+Dataset Description: 
+The dataset is provided as a CSV file named Gold_data.csv in this link: Gold_data.csv 
+For this assignment the target variable is: “Close” which corresponds to the Gold closing 
+price of the day. 
+ 
+Assignment Steps and Reporting Guidelines 
+ 
+1. Data Import and Exploration 
+Task: 
+Load the Gold_data.csv dataset. 
+Report Deliverables: 
+• Describe the dataset, including the number of observations, number of variables, 
+number of missing values or NaN(s).  
+• Clearly state that Close is the target variable and the remaining columns are input 
+features and describe the distribution of that variable. 
+• Show outputs in a summary table from commands such as head, info, describe, 
+size, or equivalent.  
+• Display the first few rows of the processed dataset.  
+• Discuss initial observations regarding data types, value ranges, and any 
+irregularities. 
+ 
+2. Data Cleaning and Preprocessing 
+Task: 
+Check the input features and target variable for missing, zero, duplicated, or anomalous 
+values and handle them appropriately. Apply any necessary preprocessing such as 
+imputation, clipping, normalization, format correction or scaling. 
+ 
+Artificial Neural Networks 2025/2026 
+Faculty of Exact Sciences and Engineering 
+Report Deliverables: 
+• Explain how missing values and anomalous values were identified.  
+• Discuss how issues such as missing Sales, zero Volume, or outliers in the price 
+variables were handled.  
+• Include before-and-after summaries or plots showing the effects of cleaning.  
+• Justify the preprocessing decisions made for both the input features and the target. 
+ 
+3. Exploratory Data Analysis (EDA) 
+Task: 
+Explore the distributions and relationships between the input features and the target 
+variable Close. 
+Report Deliverables: 
+• Include at least three types of plots, such as:  
+o histograms  
+o boxplots  
+o scatter plots  
+o pair plots  
+o correlation heatmaps  
+• Include plots that help relate the input features to Close.  
+• Interpret each visualization and discuss patterns such as skewness, outliers, linear 
+relationships, or feature redundancy.  
+• Summarize the most important insights from the dataset. 
+ 
+4. Feature Transformation Techniques 
+Task: 
+Apply suitable feature transformations to the input variables and, if justified, to the target 
+variable. 
+Report Deliverables: 
+• Explain why feature transformation is useful in this dataset.  
+• Apply transformations such as z -score normalization, min -max scaling, or log 
+transformation where appropriate.  
+• Illustrate the effects of transformation using before-and-after visualizations.  
+• Discuss whether these transformations improve feature comparability or reduce 
+skewness. 
+Artificial Neural Networks 2025/2026 
+Faculty of Exact Sciences and Engineering 
+ 
+5. Feature Selection Methods 
+Task: 
+Evaluate redundancy among the input features and identify a subset of features that are 
+most useful for explaining the target variable Close. 
+Report Deliverables: 
+• Provide a correlation matrix or heatmap for the input features.  
+• Analyze the relationship between each input feature and the target variable.  
+• Explain the criteria used to remove redundant or weakly useful features.  
+• Present the final selected subset of input features and justify your choices.  
+• Discuss why feature selection is important before predictive modeling. 
+ 
+6. Feature Engineering 
+Task: 
+Create one or more new input features from the original input variables to improve the 
+representation of the data. 
+Report Deliverables: 
+• Engineer at least two new features from the input variables.  
+• Explain why the engineered features were created and how they may help explain 
+the target variable Close.  
+• Include at least one visualization showing the behavior of the engineered features.  
+• Discuss whether the new features appear to provide additional useful information. 
+ 
+7. Comparative Analysis and Reporting 
+Task: 
+Compare the original input features, transformed features, selected features, and 
+engineered features with respect to their usefulness for predicting Close. 
+Report Deliverables: 
+• Provide visual or statistical comparisons between the different feature sets.  
+• Summarize the main findings from each step of the assignment.  
+• Discuss which preprocessing and engineering steps were most useful.  
+• Explain how the final feature set may support future predictive modeling of Close. 
+ 
+Artificial Neural Networks 2025/2026 
+Faculty of Exact Sciences and Engineering 
+Final Deliverables 
+1. Comprehensive Report: 
+o Introduction: An overview of the dataset and the objectives of the 
+assignment. 
+o Methodology: Detailed descriptions of each processing step (data 
+cleaning, EDA, feature transformation, selection and feature engineering), 
+including annotated code snippets, figures, and interpretations. 
+o Results: A summary of key findings from each step with visual comparisons 
+and descriptive statistics. 
+o Discussion: Reflection on the effectiveness of the techniques used, 
+challenges encountered, and potential improvements. 
+o Conclusion: An overall summary of insights gained from the feature 
+analysis and discussion of how the engineered features could be applied in 
+future predictive modeling. 
+o Appendix: Complete code listings and any additional figures. 
+o Format: IEEE Publishing Template, maximum 10 pages: 
+(https://www.ieee.org/conferences/publishing/templates.html) 
+2. Presentation: 
+o Prepare a short presentation (approximately 10–15 slides) highlighting:  
+▪ Key visualizations (e.g., histograms, correlation matrix, PCA plot). 
+▪ Insights from your feature analysis and engineering process. 
+▪ The overall impact of the preprocessing steps on the data quality. 
+▪ Presentation time limit: 10 minutes. 
+ 
+Submission Details 
+Please ensure a clear, well-organized, and thoroughly documented report and presentation. 
+Your work will be evaluated based on the depth of analysis, clarity of your documentation, 
+and the insights provided on the impact of feature engineering on the dataset. 
+The ZIP archive must be emailed to trabalhos@uma.pt  no later than 23:59 on 18 April 2026 
+(hard deadline). A brief oral presentation of the work will take place on 22 April 2026. The 
+room and scheduled time will be announced at a later date. 
+After submitting, forward the email to: 
+• morgado@staff.uma.pt 
+• decio.alves@staff.uma.pt 
+ 
