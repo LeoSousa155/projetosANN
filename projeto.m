@@ -250,4 +250,3 @@ fprintf('\n----------------------------------------\n');
 disp('Guardados ficheiros físicos (Filtro Aplicado: APENAS features selecionadas transferidas).');
 disp('-> Gold_TrainData_Processed.csv');
 disp('-> Gold_TestData_Processed.csv');
-disp('A Base de Dados está limpa, isolada e à prova de erro para introduzir de imediato na Rede Neuronal!');
