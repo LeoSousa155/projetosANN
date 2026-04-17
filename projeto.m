@@ -7,8 +7,27 @@ data = readtable("Gold_data.csv");
 
 fprintf('--- Exploração Inicial ---\n');
 fprintf('Observações: %d | Features: %d\n', size(data, 1), size(data, 2));
-disp('Valores em falta por feature:');
+
+disp('Valores em falta (NaN) por feature:');
 disp(array2table(sum(ismissing(data)), 'VariableNames', data.Properties.VariableNames));
+
+% Contagem de zeros
+zeros_count = zeros(1, size(data, 2));
+for i = 1:size(data, 2)
+    col_data = data{:, i};
+    if isnumeric(col_data)
+        zeros_count(i) = sum(col_data == 0, 'omitnan');
+    else
+        % Contabilizar de forma segura mesmo em colunas lidas como string/texto
+        num_data = str2double(string(col_data));
+        zeros_count(i) = sum(num_data == 0, 'omitnan');
+    end
+end
+disp('Contagem de valores iguais a zero:');
+disp(array2table(zeros_count, 'VariableNames', data.Properties.VariableNames));
+
+disp('Sumário estatístico inicial:');
+summary(data)
 
 %% 2) Data Cleaning
 if ismember('Date', data.Properties.VariableNames)
@@ -34,6 +53,8 @@ for i = 1:length(todas_vars)
         data.(col) = str2double(str_data);
     end
 end
+
+
 
 % 2.2) Tratamento de valores inválidos (Negativos em geral, Zeros no Volume)
 for i = 1:length(todas_vars)
