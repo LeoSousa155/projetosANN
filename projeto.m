@@ -1,322 +1,232 @@
-% Projeto 1 de redes neuronais artificiais
-clc
-clearvars
+% Projeto 1 de Redes Neuronais Artificiais
+clc;
+clearvars;
 
-
-%% 1) Import Data and Exploration
-% a função head mostra as primeiras 8 linhas dos dados selecionados
-    % para mudar a visualização da tabela usamos:
-    % >> format short g (formato curto, mais comum)
-    % >> format long g  (formato longo com mais precisão decimal)
-
-% Carregar o dataset e visualização inicial dos dados
+%% 1) Importação e Análise Inicial
 data = readtable("Gold_data.csv");
 
-% Estatísticas descritivas iniciais (Requisito 1 do Enunciado)
-numObs = size(data, 1);
-numVars = size(data, 2);
-missingData = sum(ismissing(data)); % Contagem de NaNs por coluna
-
 fprintf('--- Exploração Inicial ---\n');
-fprintf('Número de Observações: %d\n', numObs);
-fprintf('Número de Variáveis: %d\n', numVars);
-fprintf('Valores em falta por feature:\n');
-disp(array2table(missingData, 'VariableNames', data.Properties.VariableNames));
+fprintf('Observações: %d | Features: %d\n', size(data, 1), size(data, 2));
+disp('Valores em falta por feature:');
+disp(array2table(sum(ismissing(data)), 'VariableNames', data.Properties.VariableNames));
 
-summary(data)
-disp(head(data))
+%% 2) Data Cleaning
+if ismember('Date', data.Properties.VariableNames)
+    data = removevars(data, 'Date');
+end
 
-% Neste projeto o objetivo é conseguir prever o valor do "Close" com base nas  restantes features
-
-
-
-%% 2) Data Cleaning and Preprocessing
-
-data = removevars(data, 'Date');  % remover a coluna de datas (n são valores numéricos)
-
-summary(data)
-zeros_volumes = sum(data.Volume == 0);   % nº de valores 0 na feature Volume
-
-% Imputação pela mediana global 
-% data.Sales = fillmissing(data.Sales, 'constant', median(data.Sales, 'omitnan'));
-% A distribuição fica uniforme com um pico na mediana, a linear dá uma
-% distribuição mais normal
-
-% Limpeza de valores negativos anómalos (ex: outlier de 'weight' < 0)
-% Preços, Volumes e Pesos não podem ser negativos. 
-% Vamos converter em NaN para serem preenchidos pela imputação.
-numericVars = data.Properties.VariableNames(varfun(@isnumeric, data, 'OutputFormat', 'uniform'));
-for i = 1:length(numericVars)
-    col = numericVars{i};
-    numNeg = sum(data.(col) < 0);
-    if numNeg > 0
-        fprintf('Aviso: Detetados %d valores negativos na coluna %s. Convertendo em NaN.\n', numNeg, col);
-        data.(col)(data.(col) < 0) = NaN;
+% 2.1) Remoção de cabeçalhos repetidos e padronização para numérico
+todas_vars = data.Properties.VariableNames;
+for i = 1:length(todas_vars)
+    col = todas_vars{i};
+    if ~isnumeric(data.(col))
+        str_data = string(data.(col));
+        str_data(ismissing(str_data)) = "";
+        
+        idx_nao_num = isnan(str2double(str_data));
+        idx_vazio = (strtrim(str_data) == "") | strcmpi(strtrim(str_data), "nan") | strcmpi(strtrim(str_data), "na");
+        idx_cabecalho = idx_nao_num & ~idx_vazio;
+        
+        if any(idx_cabecalho)
+            data(idx_cabecalho, :) = [];
+            str_data = string(data.(col));
+        end
+        data.(col) = str2double(str_data);
     end
 end
 
-% 1. Tratar Volume zero como dado em falta (NaN)
-if ismember('Volume', data.Properties.VariableNames)
-    data.Volume(data.Volume == 0) = NaN;
+% 2.2) Tratamento de valores inválidos (Negativos em geral, Zeros no Volume)
+for i = 1:length(todas_vars)
+    col = todas_vars{i};
+    if ~isnumeric(data.(col)), continue; end
+    
+    temp_col = data.(col);
+    temp_col(temp_col < 0) = NaN;
+    if strcmp(col, 'Volume'), temp_col(temp_col == 0) = NaN; end
+    data.(col) = temp_col;
 end
 
-% 2. Imputação robusta para todas as colunas numéricas
-% Usamos 'linear' para continuidade e 'nearest' para tratar NaNs nas extremidades (ex: linha 1)
-for i = 1:length(numericVars)
-    col = numericVars{i};
-    data.(col) = fillmissing(data.(col), 'linear');
-    data.(col) = fillmissing(data.(col), 'nearest');
-end
+% 2.3) Imputação de Valores Ausentes (NaNs)
+numericVars = data.Properties.VariableNames(varfun(@isnumeric, data, 'OutputFormat', 'uniform'));
+data = fillmissing(data, 'linear', 'DataVariables', numericVars, 'EndValues', 'nearest');
 
-fprintf('--- Limpeza de Dados Concluída ---\n');
+fprintf('--- Limpeza Concluída ---\n');
 summary(data)
 
+%% 3) Exploratory Data Analysis (EDA)
+vars_no_volume = data.Properties.VariableNames(~strcmp(data.Properties.VariableNames, 'Volume'));
 
-
-%% 3) Exploratory Data Analysis
-% Visualização dos histogramas (EDA)
-% Separamos o Volume para visualizar a sua distribuição com escala logarítmica
-vars = data.Properties.VariableNames;
-vars_no_volume = vars(~strcmp(vars, 'Volume'));
-nVarsNoVol = length(vars_no_volume);
-
-figure
-nRows = ceil(nVarsNoVol/3);
-for i = 1:nVarsNoVol
-    subplot(nRows, 3, i);
+% Histograma das Features Lineares
+figure;
+for i = 1:length(vars_no_volume)
+    subplot(ceil(length(vars_no_volume)/3), 3, i);
     histogram(data{:, vars_no_volume{i}});
-    title(['Distribuição de ', vars_no_volume{i}]);
-    grid on;
+    title(['Distribuição de ' vars_no_volume{i}]); grid on;
 end
-sgtitle('Histogramas das Features (Escala Linear)');
+sgtitle('Histogramas de Frequência das Features (Escala Linear)');
 
-% Gráfico do Volume com escala Logarítmica para melhor visualização da distribuição
+% Histograma Volume
 figure;
-subplot(1, 2, 1);
 histogram(data.Volume);
-title('Distribuição de Volume (Linar)');
-grid on;
+set(gca, 'YScale', 'log'); 
+title('Frequência do Volume Negociado'); ylabel('Frequência (Log)'); grid on;
 
-subplot(1, 2, 2);
-histogram(data.Volume);
-set(gca, 'XScale', 'log');
-title('Distribuição de Volume (Logarítmica)');
-grid on;
-sgtitle('Análise Detalhada da Feature Volume');
-
-% gráficos de dispersão das features vs Close
-figure
-subplot(2, 3, 1); scatter(data.Open, data.Close); title('Open vs Close');
-subplot(2, 3, 2); scatter(data.High, data.Close); title('Hight vs Close');
-subplot(2, 3, 3); scatter(data.Low, data.Close); title('Low vs Close');
-subplot(2, 3, 4); scatter(data.Volume, data.Close); title('Volume vs Close');
-subplot(2, 3, 5); scatter(data.Sales, data.Close); title('Sales vs Close');
-subplot(2, 3, 6); scatter(data.weight, data.Close); title('Weight vs Close');
-
-
-% Gráficos de caixa e bigodes das features para analisar outliers e
-% dispersão
+% Dispersão vs Close
 figure;
-% Agrupamos as variáveis de preço para ver a escala comum
-subplot(1, 2, 1);
-boxplot(table2array(data(:, {'Open', 'High', 'Low', 'Close'})));
-xticklabels({'Open', 'High', 'Low', 'Close'});
-title('Distribuição de Preços (Outliers)');
-% Boxplot para Sales e Weight (escalas similares)
-subplot(1, 4, 3);
-boxplot(table2array(data(:, {'Sales', 'weight'})));
-xticklabels({'Sales', 'weight'});
-title('Sales e Weight');
+scatter_vars = {'Open', 'High', 'Low', 'Volume', 'Sales', 'weight'};
+for i = 1:length(scatter_vars)
+    subplot(2, 3, i); scatter(data.(scatter_vars{i}), data.Close); title(['Relação ' scatter_vars{i} ' e Close']);
+end
+sgtitle('Dispersão das Features Originais Face ao Preço de Fecho');
 
-% Boxplot para Volume (escala muito superior)
-subplot(1, 4, 4);
-boxplot(data.Volume);
-set(gca, 'YScale', 'log'); % Escala logarítmica para visualizar melhor a distribuição e outliers
-xticklabels({'Volume'});
-title('Volume (Escala Log)');
-
-
-% Matriz de correlação entre as features
-corr_matrix = corr(table2array(data));
+% Boxplots para Outliers
 figure;
-heatmap(data.Properties.VariableNames, data.Properties.VariableNames, corr_matrix);
-title('Matriz de Correlação');
+subplot(1, 4, 1); boxplot(table2array(data(:, {'Open', 'High', 'Low', 'Close'}))); title('Prices'); xticklabels({'Open', 'High', 'Low', 'Close'});
+subplot(1, 4, 2); boxplot(data.Sales); title('Sales'); xticklabels({'Sales'});
+subplot(1, 4, 3); boxplot(data.weight); title('Weight'); xticklabels({'Weight'});
+subplot(1, 4, 4); boxplot(data.Volume); set(gca, 'YScale', 'log'); title('Volume (Escala Logarítmica)'); xticklabels({'Volume'});
+sgtitle('Boxplots: Verificação de Outliers');
 
+% Correlação
+figure; heatmap(data.Properties.VariableNames, data.Properties.VariableNames, corr(table2array(data))); title('Matriz de Correlação Global');
 
-
-
-%% 4) Feature Engineering (Requisito 6)
-% Criar novas features antes da normalização e seleção
-% 1. HL_Range: Diferença entre o máximo e o mínimo do dia (Volatilidade)
+%% 4) Feature Engineering
 data.HL_Range = data.High - data.Low;
-
-% 2. Daily_Mean: Média aproximada do preço do dia
 data.Daily_Mean = (data.Open + data.High + data.Low) / 3;
-
-% 3. Sales_per_Weight: Relação entre vendas e peso
 data.Sales_per_Weight = data.Sales ./ (data.weight + 1e-6);
 
-fprintf('--- Feature Engineering Concluída ---\n');
-summary(data(:, {'HL_Range', 'Daily_Mean', 'Sales_per_Weight'}))
-
-% Visualização das novas features
 figure;
-subplot(1,3,1); histogram(data.HL_Range); title('Distribuição HL Range');
-subplot(1,3,2); histogram(data.Daily_Mean); title('Distribuição Daily Mean');
-subplot(1,3,3); histogram(data.Sales_per_Weight); title('Distribuição Sales per Weight');
-sgtitle('Distribuição das Novas Features Engenheiradas');
+subplot(1,3,1); 
+hl_vals = data.HL_Range(data.HL_Range > 0);
+edges = logspace(log10(min(hl_vals)), log10(max(hl_vals)), 40);
+histogram(hl_vals, edges);
+set(gca, 'XScale', 'log', 'YScale', 'log'); 
+title('Amplitude Diária de Preços (Escala Log-Log)'); grid on;
 
+subplot(1,3,2); histogram(data.Daily_Mean); title('Preço Médio Diário'); grid on;
+subplot(1,3,3); histogram(data.Sales_per_Weight); title('Densidade Vendas/Peso'); grid on;
 
+%% 5) Feature Transformation
+data_before = data;
 
-%% 5) Feature Transformation Tecniques
-% A transformação logarítmica é útil para lidar com dados "right-skewed" (assimetria à direita),
-% aproximando a distribuição de uma Gaussiana e reduzindo o impacto de outliers.
-
-% Aplicar log(1+x) para garantir estabilidade numérica (evitar log(0))
 vars_to_log = {'Open', 'High', 'Low', 'Close', 'weight', 'Volume', 'HL_Range', 'Daily_Mean', 'Sales_per_Weight'};
 
-% Criar uma cópia para comparação visual (antes vs depois)
-data_before = data; 
-
+% Transformação Logarítmica Isolada
 for i = 1:length(vars_to_log)
     if ismember(vars_to_log{i}, data.Properties.VariableNames)
-        % max(0,...) garante que x nunca é < 0, logo log1p(x) nunca é complexo
         data.(vars_to_log{i}) = real(log1p(max(0, data.(vars_to_log{i}))));
     end
 end
 
-% 4.2) Divisão em Treino e Teste (Hold-out 80/20)
-% É crucial fazer o split antes da normalização para evitar Data Leakage
-rng(42); % Seed para reprodutibilidade
+% Split Treino/Teste
+rng(42);
 cv = cvpartition(size(data, 1), 'HoldOut', 0.2);
-idxTrain = training(cv);
-idxTest = test(cv);
+train_data = data(training(cv), :);
+test_data = data(test(cv), :);
 
-train_data = data(idxTrain, :);
-test_data = data(idxTest, :);
-
-% 4.3) Normalização Z-score (Standardization)
-% Calculamos os parâmetros (média e desvio padrão) APENAS no treino
-input_features = data.Properties.VariableNames(~strcmp(data.Properties.VariableNames, 'Close'));
-
-% Normalizar o Treino
-[train_scaled, mu_input, sigma_input] = zscore(table2array(train_data(:, input_features)));
-train_data{:, input_features} = train_scaled;
-
-% Aplicar os parâmetros do Treino ao Teste
+% Standardisation (Z-Score)
+input_features = train_data.Properties.VariableNames(~strcmp(train_data.Properties.VariableNames, 'Close'));
+[train_data{:, input_features}, mu_input, sigma_input] = zscore(table2array(train_data(:, input_features)));
 test_data{:, input_features} = (table2array(test_data(:, input_features)) - mu_input) ./ sigma_input;
 
-% O target (Close) também deve ser normalizado se houver grande amplitude
-[train_close_scaled, mu_close, sigma_close] = zscore(train_data.Close);
-train_data.Close = train_close_scaled;
+[train_data.Close, mu_close, sigma_close] = zscore(train_data.Close);
 test_data.Close = (test_data.Close - mu_close) ./ sigma_close;
 
-% Guardamos os parâmetros para possível desnormalização no futuro
-norm_params.mu_input = mu_input;
-norm_params.sigma_input = sigma_input;
-norm_params.mu_close = mu_close;
-norm_params.sigma_close = sigma_close;
+% Gráficos Before/After Transformação: 1) Preços puros
+vars_prices = {'Open', 'High', 'Low', 'Close'};
+figure('Units', 'normalized', 'Position', [0.1 0.1 0.6 0.6]);
+for i = 1:length(vars_prices)
+    var = vars_prices{i};
+    subplot(2, 4, (i-1)*2 + 1);
+    histogram(data_before.(var)(~isnan(data_before.(var))));
+    title([var ' (Orig)'], 'Interpreter', 'none');
+    
+    subplot(2, 4, (i-1)*2 + 2);
+    histogram(data.(var)(~isnan(data.(var))));
+    title([var ' (Log)'], 'Interpreter', 'none');
+end
+sgtitle('Impacto da Transformação Logarítmica - Variáveis de Preço');
 
-% 4.3) Visualização Before-and-After
-figure;
-% Exemplo com a variável 'Close' (Target)
-subplot(3, 2, 1); histogram(data_before.Close); title('Close (Original)');
-subplot(3, 2, 2); histogram(data.Close); title('Close (Log Transformed)');
+% Gráficos Before/After Transformação: 2) Restantes Features
+vars_other = {'weight', 'Volume', 'HL_Range', 'Daily_Mean', 'Sales_per_Weight'};
+figure('Units', 'normalized', 'Position', [0.1 0.1 0.8 0.8]);
+for i = 1:length(vars_other)
+    var = vars_other{i};
+    subplot(3, 4, (i-1)*2 + 1);
+    histogram(data_before.(var)(~isnan(data_before.(var))));
+    if strcmp(var, 'Volume') || strcmp(var, 'HL_Range'), set(gca, 'YScale', 'log'); end
+    title([var ' (Orig)'], 'Interpreter', 'none');
+    
+    subplot(3, 4, (i-1)*2 + 2);
+    histogram(data.(var)(~isnan(data.(var))));
+    title([var ' (Log)'], 'Interpreter', 'none');
+end
+sgtitle('Impacto da Transformação Logarítmica - Restantes Features');
 
-% Exemplo com a variável 'weight'
-subplot(3, 2, 3); histogram(data_before.weight); title('Weight (Original)');
-subplot(3, 2, 4); histogram(data.weight); title('Weight (Log Transformed)');
-
-% Exemplo com a variável 'Volume'
-subplot(3, 2, 5); histogram(data_before.Volume); title('Volume (Original)');
-subplot(3, 2, 6); histogram(data.Volume); title('Volume (Log Transformed)');
-
-sgtitle('Efeito da Transformação Logarítmica');
-
-% Exibir sumário após transformações
-disp('Sumário após Transformações e Normalização:');
-summary(data)
-
-
-
-%% 6) Feature Selection Methods
-% No passo anterior vimos que Open, High, Low estão extremamente correlacionados (redundantes)
-% Vamos manter apenas 'Open' e as novas features 'HL_Range' e 'Daily_Mean' para ver se 
-% capturam a informação sem a redundância extrema.
-
-% Lista de features candidatas (excluindo o target 'Close')
-all_features = train_data.Properties.VariableNames(~strcmp(train_data.Properties.VariableNames, 'Close'));
-
-% Seleção Manual baseada na correlação e lógica do negócio:
-% Justificação: Open/High/Low têm corr > 0.999. Manter todos causa multicolinearidade.
-% Escolhemos: Open (base), Volume, HL_Range (volatilidade), Sales_per_Weight.
+%% 6) Feature Selection
 selected_features = {'Open', 'Volume', 'Sales', 'weight', 'HL_Range', 'Sales_per_Weight'};
+fprintf('\n--- Feature Selection ---\nFeatures Retidas: '); disp(selected_features);
 
-fprintf('--- Feature Selection ---\n');
-fprintf('Features Originais: %d\n', length(numericVars)-1);
-fprintf('Features Após Engineering e Seleção: %d\n', length(selected_features));
-disp(selected_features);
+figure; heatmap([selected_features, {'Close'}], [selected_features, {'Close'}], corr(table2array(train_data(:, [selected_features, {'Close'}]))));
 
-% Matriz de correlação apenas das selecionadas
-figure;
-selected_corr = corr(table2array(train_data(:, [selected_features, {'Close'}])));
-heatmap([selected_features, {'Close'}], [selected_features, {'Close'}], selected_corr);
-fprintf('\n--- Análise Final Concluída ---\n');
-
-
-
-%% 7) Comparative Analysis 
-% Comparação estatística da utilidade (Correlação com o Target)
-% Vamos comparar a correlação absoluta com 'Close' de diferentes sets
-
-% 1. Original (apenas features básicas)
+%% 7) Análise Comparativa e Justificação de Seleção
+% Avaliação da utilidade estatística de todas as features para a Rede
 orig_vars = {'Open', 'High', 'Low', 'Volume', 'Sales', 'weight'};
 corr_orig = abs(corr(table2array(train_data(:, orig_vars)), train_data.Close));
 
-% 2. Engineered
 eng_vars = {'HL_Range', 'Daily_Mean', 'Sales_per_Weight'};
 corr_eng = abs(corr(table2array(train_data(:, eng_vars)), train_data.Close));
 
-fprintf('\n--- Análise Comparativa (Correlação Absoluta com Close) ---\n');
-fprintf('Média Corr Features Originais: %.4f\n', mean(corr_orig));
-fprintf('Média Corr Features Engineered: %.4f\n', mean(corr_eng));
+% Agrupamento dos dados
+all_corr_vals = [corr_orig; corr_eng];
+all_corr_names = [orig_vars, eng_vars];
+is_selected_logic = ismember(all_corr_names, selected_features);
 
-% Visualização da importância relativa (Correlação)
 figure;
-bar([corr_orig; corr_eng]);
-set(gca, 'xticklabel', [orig_vars, eng_vars], 'XTickLabelRotation', 45);
-ylabel('Correlação Absoluta com o Target (Close)');
-title('Comparação da Utilidade das Features');
-grid on;
+hold on;
+b1 = bar(find(is_selected_logic), all_corr_vals(is_selected_logic), 'FaceColor', [0 0.4470 0.7410]);
+b2 = bar(find(~is_selected_logic), all_corr_vals(~is_selected_logic), 'FaceColor', [0.8500 0.3250 0.0980]);
 
+xlim([0 length(all_corr_names)+1]);
+set(gca, 'xtick', 1:length(all_corr_names), 'xticklabel', all_corr_names, 'XTickLabelRotation', 45);
+ylabel('Correlação Absoluta (Afinidade c/ o Preço Close)'); 
+title('Comparativo de Feature Selection: Selecionadas vs Descartadas');
+legend([b1(1), b2(1)], {'Retidas para a Rede', 'Descartadas (Alta Multicolinearidade)'}, 'Location', 'northeast');
+grid on; hold off;
 
-%% 8) PCA Final (Análise pós-tratamento)
-% Executamos o PCA agora com os dados transformados e normalizados para ver
-% a estrutura final que será alimentada aos modelos.
-
-% Selecionar colunas numéricas do conjunto de treino (já processado)
-numericVarsFinal = train_data.Properties.VariableNames(varfun(@isnumeric, train_data, 'OutputFormat', 'uniform'));
-numericDataFinal = table2array(train_data(:, numericVarsFinal));
-[coeff_final, score_final, ~, ~, explained_final, ~] = pca(numericDataFinal);
+%% 8) PCA Final
+num_data_final = table2array(train_data(:, selected_features));
+[coeff_final, score_final, ~, ~, explained_final] = pca(num_data_final);
 
 figure;
 subplot(1, 2, 1);
-pareto(explained_final);
-xlabel('Componente Principal');
-ylabel('Variância (%)');
-title('Scree Plot Final (Pós-Tratamento)');
+pareto(max(0, explained_final)); title('Scree Plot (PCA)'); xlabel('Componente'); ylabel('Variância (%)');
 
 subplot(1, 2, 2);
 scatter(score_final(:,1), score_final(:,2), 15, train_data.Close, 'filled');
-cb = colorbar;
-cb.Label.String = 'Preço Close (Normalizado)';
-xlabel(['PC1 (', num2str(explained_final(1), '%.1f'), '%)']);
-ylabel(['PC2 (', num2str(explained_final(2), '%.1f'), '%)']);
-title('Projeção PCA Final (Dados Tratados)');
-grid on;
+colorbar; title('Projeção PCA Final'); xlabel(sprintf('PC1 (%.1f%%)', explained_final(1))); ylabel(sprintf('PC2 (%.1f%%)', explained_final(2))); grid on;
 
-figure;
-biplot(coeff_final(:,1:2), 'Scores', score_final(:,1:2), 'VarLabels', numericVarsFinal);
-title('Biplot Final: Estrutura das Features Processadas');
+figure; biplot(coeff_final(:,1:2), 'Scores', score_final(:,1:2), 'VarLabels', selected_features); title('Biplot PCA (Projeção das Variáveis Retidas)');
 
-disp('Processamento Completo. O dataset está pronto para modelação preditiva.');
+%% 9) Distribuições Finais e Exportação Física
+final_cols = [selected_features, {'Close'}];
+
+% Gráfico que prova o estado final (já tratado e normalizado) dos dados que seguem para Modelo
+figure('Units', 'normalized', 'Position', [0.15 0.15 0.8 0.8]);
+for i = 1:length(final_cols)
+    subplot(2, ceil(length(final_cols)/2), i);
+    histogram(train_data.(final_cols{i})(~isnan(train_data.(final_cols{i}))));
+    title([final_cols{i} ' (Final Z-Score)'], 'Interpreter', 'none');
+    grid on;
+end
+sgtitle('Distribuição Final: Features de Input + Target (Prontas para a Rede)');
+
+% Gravar as bases de dados isolando ativamente Colunas Relevantes
+writetable(train_data(:, final_cols), 'Gold_TrainData_Processed.csv');
+writetable(test_data(:, final_cols), 'Gold_TestData_Processed.csv');
+
+fprintf('\n----------------------------------------\n');
+disp('Guardados ficheiros físicos (Filtro Aplicado: APENAS features selecionadas transferidas).');
+disp('-> Gold_TrainData_Processed.csv');
+disp('-> Gold_TestData_Processed.csv');
+disp('A Base de Dados está limpa, isolada e à prova de erro para introduzir de imediato na Rede Neuronal!');
