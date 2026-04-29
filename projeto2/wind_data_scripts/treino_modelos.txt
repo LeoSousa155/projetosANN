@@ -1,0 +1,309 @@
+=============================================
+         PREPARAÇÃO DOS DADOS (SPLIT)        
+=============================================
+Treino/Validação (Optimização): 943681 amostras
+Teste Final (Cofre isolado):    104854 amostras
+
+Algoritmo de treino definido para Levenberg-Marquardt (trainlm).
+
+=============================================
+    OTIMIZAÇÃO DE REDE NEURONAL (30 RUNS)    
+=============================================
+Total de redes a treinar: 240 treinos
+
+A avaliar Ponto 1/8 [Neurónios:  5 | Ativação: tansig]:
+  -> Treinando modelo  1/30 do Ponto 1 ... Concluído! (Val MSE: 0.6439)
+  -> Treinando modelo  2/30 do Ponto 1 ... Concluído! (Val MSE: 0.6425)
+  -> Treinando modelo  3/30 do Ponto 1 ... Concluído! (Val MSE: 0.6574)
+  -> Treinando modelo  4/30 do Ponto 1 ... Concluído! (Val MSE: 0.6544)
+  -> Treinando modelo  5/30 do Ponto 1 ... Concluído! (Val MSE: 0.6618)
+  -> Treinando modelo  6/30 do Ponto 1 ... Concluído! (Val MSE: 0.6609)
+  -> Treinando modelo  7/30 do Ponto 1 ... Concluído! (Val MSE: 0.6549)
+  -> Treinando modelo  8/30 do Ponto 1 ... Concluído! (Val MSE: 0.6506)
+  -> Treinando modelo  9/30 do Ponto 1 ... Concluído! (Val MSE: 0.6547)
+  -> Treinando modelo 10/30 do Ponto 1 ... Concluído! (Val MSE: 0.6562)
+  -> Treinando modelo 11/30 do Ponto 1 ... Concluído! (Val MSE: 0.6489)
+  -> Treinando modelo 12/30 do Ponto 1 ... Concluído! (Val MSE: 0.6439)
+  -> Treinando modelo 13/30 do Ponto 1 ... Concluído! (Val MSE: 0.6586)
+  -> Treinando modelo 14/30 do Ponto 1 ... Concluído! (Val MSE: 0.6498)
+  -> Treinando modelo 15/30 do Ponto 1 ... Concluído! (Val MSE: 0.6468)
+  -> Treinando modelo 16/30 do Ponto 1 ... Concluído! (Val MSE: 0.6632)
+  -> Treinando modelo 17/30 do Ponto 1 ... Concluído! (Val MSE: 0.6467)
+  -> Treinando modelo 18/30 do Ponto 1 ... Concluído! (Val MSE: 0.6540)
+  -> Treinando modelo 19/30 do Ponto 1 ... Concluído! (Val MSE: 0.6544)
+  -> Treinando modelo 20/30 do Ponto 1 ... Concluído! (Val MSE: 0.6510)
+  -> Treinando modelo 21/30 do Ponto 1 ... Concluído! (Val MSE: 0.6578)
+  -> Treinando modelo 22/30 do Ponto 1 ... Concluído! (Val MSE: 0.6519)
+  -> Treinando modelo 23/30 do Ponto 1 ... Concluído! (Val MSE: 0.6549)
+  -> Treinando modelo 24/30 do Ponto 1 ... Concluído! (Val MSE: 0.6528)
+  -> Treinando modelo 25/30 do Ponto 1 ... Concluído! (Val MSE: 0.6535)
+  -> Treinando modelo 26/30 do Ponto 1 ... Concluído! (Val MSE: 0.6601)
+  -> Treinando modelo 27/30 do Ponto 1 ... Concluído! (Val MSE: 0.6564)
+  -> Treinando modelo 28/30 do Ponto 1 ... Concluído! (Val MSE: 0.6633)
+  -> Treinando modelo 29/30 do Ponto 1 ... Concluído! (Val MSE: 0.6581)
+  -> Treinando modelo 30/30 do Ponto 1 ... Concluído! (Val MSE: 0.6571)
+=> RESUMO PONTO 1 | Média Val MSE: 0.6540 | Variância: 0.000032
+
+A avaliar Ponto 2/8 [Neurónios:  5 | Ativação: poslin]:
+  -> Treinando modelo  1/30 do Ponto 2 ... Concluído! (Val MSE: 0.6590)
+  -> Treinando modelo  2/30 do Ponto 2 ... Concluído! (Val MSE: 0.6488)
+  -> Treinando modelo  3/30 do Ponto 2 ... Concluído! (Val MSE: 0.6549)
+  -> Treinando modelo  4/30 do Ponto 2 ... Concluído! (Val MSE: 0.6478)
+  -> Treinando modelo  5/30 do Ponto 2 ... Concluído! (Val MSE: 0.6505)
+  -> Treinando modelo  6/30 do Ponto 2 ... Concluído! (Val MSE: 0.6501)
+  -> Treinando modelo  7/30 do Ponto 2 ... Concluído! (Val MSE: 0.6507)
+  -> Treinando modelo  8/30 do Ponto 2 ... Concluído! (Val MSE: 0.6405)
+  -> Treinando modelo  9/30 do Ponto 2 ... Concluído! (Val MSE: 0.6432)
+  -> Treinando modelo 10/30 do Ponto 2 ... Concluído! (Val MSE: 0.6497)
+  -> Treinando modelo 11/30 do Ponto 2 ... Concluído! (Val MSE: 0.6514)
+  -> Treinando modelo 12/30 do Ponto 2 ... Concluído! (Val MSE: 0.6501)
+  -> Treinando modelo 13/30 do Ponto 2 ... Concluído! (Val MSE: 0.6454)
+  -> Treinando modelo 14/30 do Ponto 2 ... Concluído! (Val MSE: 0.6490)
+  -> Treinando modelo 15/30 do Ponto 2 ... Concluído! (Val MSE: 0.6474)
+  -> Treinando modelo 16/30 do Ponto 2 ... Concluído! (Val MSE: 0.6302)
+  -> Treinando modelo 17/30 do Ponto 2 ... Concluído! (Val MSE: 0.6477)
+  -> Treinando modelo 18/30 do Ponto 2 ... Concluído! (Val MSE: 0.6437)
+  -> Treinando modelo 19/30 do Ponto 2 ... Concluído! (Val MSE: 0.6334)
+  -> Treinando modelo 20/30 do Ponto 2 ... Concluído! (Val MSE: 0.6331)
+  -> Treinando modelo 21/30 do Ponto 2 ... Concluído! (Val MSE: 0.6509)
+  -> Treinando modelo 22/30 do Ponto 2 ... Concluído! (Val MSE: 0.6595)
+  -> Treinando modelo 23/30 do Ponto 2 ... Concluído! (Val MSE: 0.6476)
+  -> Treinando modelo 24/30 do Ponto 2 ... Concluído! (Val MSE: 0.6455)
+  -> Treinando modelo 25/30 do Ponto 2 ... Concluído! (Val MSE: 0.6570)
+  -> Treinando modelo 26/30 do Ponto 2 ... Concluído! (Val MSE: 0.6424)
+  -> Treinando modelo 27/30 do Ponto 2 ... Concluído! (Val MSE: 0.6517)
+  -> Treinando modelo 28/30 do Ponto 2 ... Concluído! (Val MSE: 0.6478)
+  -> Treinando modelo 29/30 do Ponto 2 ... Concluído! (Val MSE: 0.6563)
+  -> Treinando modelo 30/30 do Ponto 2 ... Concluído! (Val MSE: 0.6491)
+=> RESUMO PONTO 2 | Média Val MSE: 0.6478 | Variância: 0.000049
+
+A avaliar Ponto 3/8 [Neurónios: 10 | Ativação: tansig]:
+  -> Treinando modelo  1/30 do Ponto 3 ... Concluído! (Val MSE: 0.6558)
+  -> Treinando modelo  2/30 do Ponto 3 ... Concluído! (Val MSE: 0.6550)
+  -> Treinando modelo  3/30 do Ponto 3 ... Concluído! (Val MSE: 0.6481)
+  -> Treinando modelo  4/30 do Ponto 3 ... Concluído! (Val MSE: 0.6450)
+  -> Treinando modelo  5/30 do Ponto 3 ... Concluído! (Val MSE: 0.6573)
+  -> Treinando modelo  6/30 do Ponto 3 ... Concluído! (Val MSE: 0.6517)
+  -> Treinando modelo  7/30 do Ponto 3 ... Concluído! (Val MSE: 0.6514)
+  -> Treinando modelo  8/30 do Ponto 3 ... Concluído! (Val MSE: 0.6597)
+  -> Treinando modelo  9/30 do Ponto 3 ... Concluído! (Val MSE: 0.6524)
+  -> Treinando modelo 10/30 do Ponto 3 ... Concluído! (Val MSE: 0.6674)
+  -> Treinando modelo 11/30 do Ponto 3 ... Concluído! (Val MSE: 0.6479)
+  -> Treinando modelo 12/30 do Ponto 3 ... Concluído! (Val MSE: 0.6712)
+  -> Treinando modelo 13/30 do Ponto 3 ... Concluído! (Val MSE: 0.6468)
+  -> Treinando modelo 14/30 do Ponto 3 ... Concluído! (Val MSE: 0.6624)
+  -> Treinando modelo 15/30 do Ponto 3 ... Concluído! (Val MSE: 0.6517)
+  -> Treinando modelo 16/30 do Ponto 3 ... Concluído! (Val MSE: 0.6620)
+  -> Treinando modelo 17/30 do Ponto 3 ... Concluído! (Val MSE: 0.6586)
+  -> Treinando modelo 18/30 do Ponto 3 ... Concluído! (Val MSE: 0.6618)
+  -> Treinando modelo 19/30 do Ponto 3 ... Concluído! (Val MSE: 0.6434)
+  -> Treinando modelo 20/30 do Ponto 3 ... Concluído! (Val MSE: 0.6517)
+  -> Treinando modelo 21/30 do Ponto 3 ... Concluído! (Val MSE: 0.6576)
+  -> Treinando modelo 22/30 do Ponto 3 ... Concluído! (Val MSE: 0.6584)
+  -> Treinando modelo 23/30 do Ponto 3 ... Concluído! (Val MSE: 0.6511)
+  -> Treinando modelo 24/30 do Ponto 3 ... Concluído! (Val MSE: 0.6540)
+  -> Treinando modelo 25/30 do Ponto 3 ... Concluído! (Val MSE: 0.6488)
+  -> Treinando modelo 26/30 do Ponto 3 ... Concluído! (Val MSE: 0.6512)
+  -> Treinando modelo 27/30 do Ponto 3 ... Concluído! (Val MSE: 0.6542)
+  -> Treinando modelo 28/30 do Ponto 3 ... Concluído! (Val MSE: 0.6497)
+  -> Treinando modelo 29/30 do Ponto 3 ... Concluído! (Val MSE: 0.6544)
+  -> Treinando modelo 30/30 do Ponto 3 ... Concluído! (Val MSE: 0.6537)
+=> RESUMO PONTO 3 | Média Val MSE: 0.6545 | Variância: 0.000040
+
+A avaliar Ponto 4/8 [Neurónios: 10 | Ativação: poslin]:
+  -> Treinando modelo  1/30 do Ponto 4 ... Concluído! (Val MSE: 0.6515)
+  -> Treinando modelo  2/30 do Ponto 4 ... Concluído! (Val MSE: 0.6619)
+  -> Treinando modelo  3/30 do Ponto 4 ... Concluído! (Val MSE: 0.6461)
+  -> Treinando modelo  4/30 do Ponto 4 ... Concluído! (Val MSE: 0.6491)
+  -> Treinando modelo  5/30 do Ponto 4 ... Concluído! (Val MSE: 0.6455)
+  -> Treinando modelo  6/30 do Ponto 4 ... Concluído! (Val MSE: 0.6581)
+  -> Treinando modelo  7/30 do Ponto 4 ... Concluído! (Val MSE: 0.6480)
+  -> Treinando modelo  8/30 do Ponto 4 ... Concluído! (Val MSE: 0.6493)
+  -> Treinando modelo  9/30 do Ponto 4 ... Concluído! (Val MSE: 0.6429)
+  -> Treinando modelo 10/30 do Ponto 4 ... Concluído! (Val MSE: 0.6542)
+  -> Treinando modelo 11/30 do Ponto 4 ... Concluído! (Val MSE: 0.6444)
+  -> Treinando modelo 12/30 do Ponto 4 ... Concluído! (Val MSE: 0.6499)
+  -> Treinando modelo 13/30 do Ponto 4 ... Concluído! (Val MSE: 0.6663)
+  -> Treinando modelo 14/30 do Ponto 4 ... Concluído! (Val MSE: 0.6470)
+  -> Treinando modelo 15/30 do Ponto 4 ... Concluído! (Val MSE: 0.6521)
+  -> Treinando modelo 16/30 do Ponto 4 ... Concluído! (Val MSE: 0.6539)
+  -> Treinando modelo 17/30 do Ponto 4 ... Concluído! (Val MSE: 0.6481)
+  -> Treinando modelo 18/30 do Ponto 4 ... Concluído! (Val MSE: 0.6460)
+  -> Treinando modelo 19/30 do Ponto 4 ... Concluído! (Val MSE: 0.6484)
+  -> Treinando modelo 20/30 do Ponto 4 ... Concluído! (Val MSE: 0.6473)
+  -> Treinando modelo 21/30 do Ponto 4 ... Concluído! (Val MSE: 0.6549)
+  -> Treinando modelo 22/30 do Ponto 4 ... Concluído! (Val MSE: 0.6478)
+  -> Treinando modelo 23/30 do Ponto 4 ... Concluído! (Val MSE: 0.6451)
+  -> Treinando modelo 24/30 do Ponto 4 ... Concluído! (Val MSE: 0.6462)
+  -> Treinando modelo 25/30 do Ponto 4 ... Concluído! (Val MSE: 0.6511)
+  -> Treinando modelo 26/30 do Ponto 4 ... Concluído! (Val MSE: 0.6507)
+  -> Treinando modelo 27/30 do Ponto 4 ... Concluído! (Val MSE: 0.6462)
+  -> Treinando modelo 28/30 do Ponto 4 ... Concluído! (Val MSE: 0.6469)
+  -> Treinando modelo 29/30 do Ponto 4 ... Concluído! (Val MSE: 0.6461)
+  -> Treinando modelo 30/30 do Ponto 4 ... Concluído! (Val MSE: 0.6507)
+=> RESUMO PONTO 4 | Média Val MSE: 0.6499 | Variância: 0.000027
+
+A avaliar Ponto 5/8 [Neurónios: 15 | Ativação: tansig]:
+  -> Treinando modelo  1/30 do Ponto 5 ... Concluído! (Val MSE: 0.6621)
+  -> Treinando modelo  2/30 do Ponto 5 ... Concluído! (Val MSE: 0.6524)
+  -> Treinando modelo  3/30 do Ponto 5 ... Concluído! (Val MSE: 0.6502)
+  -> Treinando modelo  4/30 do Ponto 5 ... Concluído! (Val MSE: 0.6620)
+  -> Treinando modelo  5/30 do Ponto 5 ... Concluído! (Val MSE: 0.6511)
+  -> Treinando modelo  6/30 do Ponto 5 ... Concluído! (Val MSE: 0.6601)
+  -> Treinando modelo  7/30 do Ponto 5 ... Concluído! (Val MSE: 0.6504)
+  -> Treinando modelo  8/30 do Ponto 5 ... Concluído! (Val MSE: 0.6574)
+  -> Treinando modelo  9/30 do Ponto 5 ... Concluído! (Val MSE: 0.6653)
+  -> Treinando modelo 10/30 do Ponto 5 ... Concluído! (Val MSE: 0.6458)
+  -> Treinando modelo 11/30 do Ponto 5 ... Concluído! (Val MSE: 0.6634)
+  -> Treinando modelo 12/30 do Ponto 5 ... Concluído! (Val MSE: 0.6562)
+  -> Treinando modelo 13/30 do Ponto 5 ... Concluído! (Val MSE: 0.6504)
+  -> Treinando modelo 14/30 do Ponto 5 ... Concluído! (Val MSE: 0.6623)
+  -> Treinando modelo 15/30 do Ponto 5 ... Concluído! (Val MSE: 0.6581)
+  -> Treinando modelo 16/30 do Ponto 5 ... Concluído! (Val MSE: 0.6518)
+  -> Treinando modelo 17/30 do Ponto 5 ... Concluído! (Val MSE: 0.6551)
+  -> Treinando modelo 18/30 do Ponto 5 ... Concluído! (Val MSE: 0.6559)
+  -> Treinando modelo 19/30 do Ponto 5 ... Concluído! (Val MSE: 0.6607)
+  -> Treinando modelo 20/30 do Ponto 5 ... Concluído! (Val MSE: 0.6544)
+  -> Treinando modelo 21/30 do Ponto 5 ... Concluído! (Val MSE: 0.6544)
+  -> Treinando modelo 22/30 do Ponto 5 ... Concluído! (Val MSE: 0.6550)
+  -> Treinando modelo 23/30 do Ponto 5 ... Concluído! (Val MSE: 0.6637)
+  -> Treinando modelo 24/30 do Ponto 5 ... Concluído! (Val MSE: 0.6567)
+  -> Treinando modelo 25/30 do Ponto 5 ... Concluído! (Val MSE: 0.6599)
+  -> Treinando modelo 26/30 do Ponto 5 ... Concluído! (Val MSE: 0.6581)
+  -> Treinando modelo 27/30 do Ponto 5 ... Concluído! (Val MSE: 0.6565)
+  -> Treinando modelo 28/30 do Ponto 5 ... Concluído! (Val MSE: 0.6541)
+  -> Treinando modelo 29/30 do Ponto 5 ... Concluído! (Val MSE: 0.6601)
+  -> Treinando modelo 30/30 do Ponto 5 ... Concluído! (Val MSE: 0.6611)
+=> RESUMO PONTO 5 | Média Val MSE: 0.6568 | Variância: 0.000023
+
+A avaliar Ponto 6/8 [Neurónios: 15 | Ativação: poslin]:
+  -> Treinando modelo  1/30 do Ponto 6 ... Concluído! (Val MSE: 0.6471)
+  -> Treinando modelo  2/30 do Ponto 6 ... Concluído! (Val MSE: 0.6489)
+  -> Treinando modelo  3/30 do Ponto 6 ... Concluído! (Val MSE: 0.6493)
+  -> Treinando modelo  4/30 do Ponto 6 ... Concluído! (Val MSE: 0.6588)
+  -> Treinando modelo  5/30 do Ponto 6 ... Concluído! (Val MSE: 0.6544)
+  -> Treinando modelo  6/30 do Ponto 6 ... Concluído! (Val MSE: 0.6540)
+  -> Treinando modelo  7/30 do Ponto 6 ... Concluído! (Val MSE: 0.6432)
+  -> Treinando modelo  8/30 do Ponto 6 ... Concluído! (Val MSE: 0.6460)
+  -> Treinando modelo  9/30 do Ponto 6 ... Concluído! (Val MSE: 0.6552)
+  -> Treinando modelo 10/30 do Ponto 6 ... Concluído! (Val MSE: 0.6476)
+  -> Treinando modelo 11/30 do Ponto 6 ... Concluído! (Val MSE: 0.6606)
+  -> Treinando modelo 12/30 do Ponto 6 ... Concluído! (Val MSE: 0.6541)
+  -> Treinando modelo 13/30 do Ponto 6 ... Concluído! (Val MSE: 0.6444)
+  -> Treinando modelo 14/30 do Ponto 6 ... Concluído! (Val MSE: 0.6427)
+  -> Treinando modelo 15/30 do Ponto 6 ... Concluído! (Val MSE: 0.6463)
+  -> Treinando modelo 16/30 do Ponto 6 ... Concluído! (Val MSE: 0.6456)
+  -> Treinando modelo 17/30 do Ponto 6 ... Concluído! (Val MSE: 0.6513)
+  -> Treinando modelo 18/30 do Ponto 6 ... Concluído! (Val MSE: 0.6489)
+  -> Treinando modelo 19/30 do Ponto 6 ... Concluído! (Val MSE: 0.6515)
+  -> Treinando modelo 20/30 do Ponto 6 ... Concluído! (Val MSE: 0.6449)
+  -> Treinando modelo 21/30 do Ponto 6 ... Concluído! (Val MSE: 0.6466)
+  -> Treinando modelo 22/30 do Ponto 6 ... Concluído! (Val MSE: 0.6514)
+  -> Treinando modelo 23/30 do Ponto 6 ... Concluído! (Val MSE: 0.6527)
+  -> Treinando modelo 24/30 do Ponto 6 ... Concluído! (Val MSE: 0.6489)
+  -> Treinando modelo 25/30 do Ponto 6 ... Concluído! (Val MSE: 0.6534)
+  -> Treinando modelo 26/30 do Ponto 6 ... Concluído! (Val MSE: 0.6505)
+  -> Treinando modelo 27/30 do Ponto 6 ... Concluído! (Val MSE: 0.6535)
+  -> Treinando modelo 28/30 do Ponto 6 ... Concluído! (Val MSE: 0.6494)
+  -> Treinando modelo 29/30 do Ponto 6 ... Concluído! (Val MSE: 0.6485)
+  -> Treinando modelo 30/30 do Ponto 6 ... Concluído! (Val MSE: 0.6531)
+=> RESUMO PONTO 6 | Média Val MSE: 0.6501 | Variância: 0.000019
+
+A avaliar Ponto 7/8 [Neurónios: 20 | Ativação: tansig]:
+  -> Treinando modelo  1/30 do Ponto 7 ... Concluído! (Val MSE: 0.6692)
+  -> Treinando modelo  2/30 do Ponto 7 ... Concluído! (Val MSE: 0.6656)
+  -> Treinando modelo  3/30 do Ponto 7 ... Concluído! (Val MSE: 0.6544)
+  -> Treinando modelo  4/30 do Ponto 7 ... Concluído! (Val MSE: 0.6613)
+  -> Treinando modelo  5/30 do Ponto 7 ... Concluído! (Val MSE: 0.6632)
+  -> Treinando modelo  6/30 do Ponto 7 ... Concluído! (Val MSE: 0.6609)
+  -> Treinando modelo  7/30 do Ponto 7 ... Concluído! (Val MSE: 0.6510)
+  -> Treinando modelo  8/30 do Ponto 7 ... Concluído! (Val MSE: 0.6593)
+  -> Treinando modelo  9/30 do Ponto 7 ... 21  trainPerf = Perfs(1);
+Concluído! (Val MSE: 0.6644)
+  -> Treinando modelo 10/30 do Ponto 7 ... Concluído! (Val MSE: 0.6625)
+  -> Treinando modelo 11/30 do Ponto 7 ... Concluído! (Val MSE: 0.6630)
+  -> Treinando modelo 12/30 do Ponto 7 ... Concluído! (Val MSE: 0.6591)
+  -> Treinando modelo 13/30 do Ponto 7 ... Concluído! (Val MSE: 0.6577)
+  -> Treinando modelo 14/30 do Ponto 7 ... Concluído! (Val MSE: 0.6515)
+  -> Treinando modelo 15/30 do Ponto 7 ... Concluído! (Val MSE: 0.6612)
+  -> Treinando modelo 16/30 do Ponto 7 ... Concluído! (Val MSE: 0.6590)
+  -> Treinando modelo 17/30 do Ponto 7 ... Concluído! (Val MSE: 0.6573)
+  -> Treinando modelo 18/30 do Ponto 7 ... Concluído! (Val MSE: 0.6539)
+  -> Treinando modelo 19/30 do Ponto 7 ... Concluído! (Val MSE: 0.6526)
+  -> Treinando modelo 20/30 do Ponto 7 ... Concluído! (Val MSE: 0.6546)
+  -> Treinando modelo 21/30 do Ponto 7 ... Concluído! (Val MSE: 0.6575)
+  -> Treinando modelo 22/30 do Ponto 7 ... Concluído! (Val MSE: 0.6648)
+  -> Treinando modelo 23/30 do Ponto 7 ... Concluído! (Val MSE: 0.6631)
+  -> Treinando modelo 24/30 do Ponto 7 ... Concluído! (Val MSE: 0.6550)
+  -> Treinando modelo 25/30 do Ponto 7 ... Concluído! (Val MSE: 0.6555)
+  -> Treinando modelo 26/30 do Ponto 7 ... Concluído! (Val MSE: 0.6546)
+  -> Treinando modelo 27/30 do Ponto 7 ... Concluído! (Val MSE: 0.6510)
+  -> Treinando modelo 28/30 do Ponto 7 ... Concluído! (Val MSE: 0.6556)
+  -> Treinando modelo 29/30 do Ponto 7 ... Concluído! (Val MSE: 0.6527)
+  -> Treinando modelo 30/30 do Ponto 7 ... Concluído! (Val MSE: 0.6625)
+=> RESUMO PONTO 7 | Média Val MSE: 0.6585 | Variância: 0.000024
+
+A avaliar Ponto 8/8 [Neurónios: 20 | Ativação: poslin]:
+  -> Treinando modelo  1/30 do Ponto 8 ... Concluído! (Val MSE: 0.6447)
+  -> Treinando modelo  2/30 do Ponto 8 ... Concluído! (Val MSE: 0.6513)
+  -> Treinando modelo  3/30 do Ponto 8 ... Concluído! (Val MSE: 0.6522)
+  -> Treinando modelo  4/30 do Ponto 8 ... Concluído! (Val MSE: 0.6607)
+  -> Treinando modelo  5/30 do Ponto 8 ... Concluído! (Val MSE: 0.6480)
+  -> Treinando modelo  6/30 do Ponto 8 ... Concluído! (Val MSE: 0.6459)
+  -> Treinando modelo  7/30 do Ponto 8 ... Concluído! (Val MSE: 0.6558)
+  -> Treinando modelo  8/30 do Ponto 8 ... Concluído! (Val MSE: 0.6500)
+  -> Treinando modelo  9/30 do Ponto 8 ... Concluído! (Val MSE: 0.6435)
+  -> Treinando modelo 10/30 do Ponto 8 ... Concluído! (Val MSE: 0.6505)
+  -> Treinando modelo 11/30 do Ponto 8 ... Concluído! (Val MSE: 0.6404)
+  -> Treinando modelo 12/30 do Ponto 8 ... Concluído! (Val MSE: 0.6490)
+  -> Treinando modelo 13/30 do Ponto 8 ... Concluído! (Val MSE: 0.6463)
+  -> Treinando modelo 14/30 do Ponto 8 ... Concluído! (Val MSE: 0.6440)
+  -> Treinando modelo 15/30 do Ponto 8 ... Concluído! (Val MSE: 0.6484)
+  -> Treinando modelo 16/30 do Ponto 8 ... Concluído! (Val MSE: 0.6458)
+  -> Treinando modelo 17/30 do Ponto 8 ... Concluído! (Val MSE: 0.6494)
+  -> Treinando modelo 18/30 do Ponto 8 ... Concluído! (Val MSE: 0.6566)
+  -> Treinando modelo 19/30 do Ponto 8 ... Concluído! (Val MSE: 0.6475)
+  -> Treinando modelo 20/30 do Ponto 8 ... Concluído! (Val MSE: 0.6432)
+  -> Treinando modelo 21/30 do Ponto 8 ... Concluído! (Val MSE: 0.6497)
+  -> Treinando modelo 22/30 do Ponto 8 ... Concluído! (Val MSE: 0.6559)
+  -> Treinando modelo 23/30 do Ponto 8 ... Concluído! (Val MSE: 0.6437)
+  -> Treinando modelo 24/30 do Ponto 8 ... Concluído! (Val MSE: 0.6502)
+  -> Treinando modelo 25/30 do Ponto 8 ... Concluído! (Val MSE: 0.6542)
+  -> Treinando modelo 26/30 do Ponto 8 ... Concluído! (Val MSE: 0.6567)
+  -> Treinando modelo 27/30 do Ponto 8 ... Concluído! (Val MSE: 0.6439)
+  -> Treinando modelo 28/30 do Ponto 8 ... Concluído! (Val MSE: 0.6476)
+  -> Treinando modelo 29/30 do Ponto 8 ... Concluído! (Val MSE: 0.6485)
+  -> Treinando modelo 30/30 do Ponto 8 ... Concluído! (Val MSE: 0.6460)
+=> RESUMO PONTO 8 | Média Val MSE: 0.6490 | Variância: 0.000023
+
+
+=============================================
+         RESULTADOS DA OTIMIZAÇÃO            
+=============================================
+    Neuronios    Ativacao    Media_Val_MSE    Variancia_Val_MSE
+    _________    ________    _____________    _________________
+
+        5        "tansig"       0.65401          3.1633e-05    
+        5        "poslin"       0.64782          4.8652e-05    
+       10        "tansig"       0.65448          4.0302e-05    
+       10        "poslin"       0.64987          2.6917e-05    
+       15        "tansig"       0.65682          2.3038e-05    
+       15        "poslin"        0.6501          1.9096e-05    
+       20        "tansig"       0.65846          2.3828e-05    
+       20        "poslin"       0.64899          2.3205e-05    
+
+A gerar gráfico de comparação (Error Bar Chart)...
+
+=============================================
+         TREINO DO MODELO FINAL (BEST)       
+=============================================
+Melhor Ponto: 2 (Neurónios: 5, Ativação: poslin)
+A treinar modelo definitivo e a abrir janela (Show Window)...
+
+=============================================
+         AVALIAÇÃO FINAL (TEST SET)          
+=============================================
+Métrica Final para o Relatório:
+=> MAE (Mean Absolute Error) Cego: 0.9795 m/s
+=============================================
+>> 
