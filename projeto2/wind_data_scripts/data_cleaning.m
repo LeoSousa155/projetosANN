@@ -95,7 +95,7 @@ data.BlockID = cumsum(data.TimeDiff > thresholdRuptura) + 1;
 
 numBlocos = max(data.BlockID);
 fprintf('\n=============================================\n');
-fprintf('      2. SEGMENTAÇÃO POR BLOCOS (GAPS)      \n');
+fprintf('      4. SEGMENTAÇÃO POR BLOCOS (GAPS)      \n');
 fprintf('=============================================\n');
 fprintf('Threshold de Ruptura: %d segundos\n', thresholdRuptura);
 fprintf('Número de blocos independentes encontrados: %d\n', numBlocos);
@@ -103,7 +103,7 @@ fprintf('---------------------------------------------\n');
 
 %% 5. Feature Engineering (Decomposição Vetorial Cíclica)
 fprintf('\n=============================================\n');
-fprintf('          3. FEATURE ENGINEERING             \n');
+fprintf('          5. FEATURE ENGINEERING             \n');
 fprintf('=============================================\n');
 fprintf('Decompondo a Direção e Velocidade em vetores contínuos (U e V)...\n');
 
@@ -133,7 +133,7 @@ fprintf('---------------------------------------------\n');
 
 %% 6. Criação da Variável Alvo (Target) - 1 Minuto no Futuro
 fprintf('\n=============================================\n');
-fprintf('       4. CRIAÇÃO DA VARIÁVEL ALVO (TARGET)  \n');
+fprintf('       6. CRIAÇÃO DA VARIÁVEL ALVO (TARGET)  \n');
 fprintf('=============================================\n');
 fprintf('Criando target para previsão de WindSpeed 60 segundos no futuro...\n');
 
@@ -171,7 +171,7 @@ end
 % Alocar os resultados finais de volta à tabela de uma só vez
 data.Target_WindSpeed = targets;
 
-fprintf('Cálculo da feature Target_WindSpeed concluído! Iniciando limpeza e correlações...\n');
+fprintf('Cálculo da feature Target_WindSpeed concluído! Iniciando limpeza de blocos órfãos...\n');
 
 % Limpeza das linhas sem Target (finais de blocos sem futuro conhecido)
 linhas_antes = height(data);

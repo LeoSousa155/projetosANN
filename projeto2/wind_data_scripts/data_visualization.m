@@ -29,7 +29,7 @@ fprintf('Contagem de intervalos de tempo >= 60 segundos: %d\n', gaps_longos);
 % Figura 1: Distribuição das Features
 figure('Name', 'Features Distribution', 'NumberTitle', 'off', 'Position', [100, 100, 800, 900]);
 subplot(3,1,1);
-histogram(data.WindSpeed, 'FaceColor', [0 0.4470 0.7410], 'EdgeColor', 'w');
+histogram(data.WindSpeed, 'NumBins', 50, 'FaceColor', [0 0.4470 0.7410], 'EdgeColor', 'w');
 set(gca, 'YScale', 'log'); 
 title('Wind Speed Distribution (Log Scale)');
 xlabel('Wind Speed (m/s)'); ylabel('Frequency (Log)'); grid on;
@@ -40,7 +40,7 @@ title('Wind Direction Distribution');
 xlabel('Direction (Degrees)'); ylabel('Frequency'); grid on;
 
 subplot(3,1,3);
-histogram(data.Wind_Acc, 'FaceColor', [0.9290 0.6940 0.1250], 'EdgeColor', 'w');
+histogram(data.Wind_Acc, 'NumBins', 50, 'FaceColor', [0.4940 0.1840 0.5560], 'EdgeColor', 'w');
 set(gca, 'YScale', 'log'); 
 title('Wind Acceleration (\Delta v) Distribution (Log Scale)');
 xlabel('Acceleration (m/s^2)'); ylabel('Frequency (Log)'); grid on;

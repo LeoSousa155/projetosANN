@@ -31,22 +31,10 @@ fprintf('=============================================\n');
 fprintf('Treino/Validação (Optimização): %d amostras\n', split_idx);
 fprintf('Teste Final (Cofre isolado):    %d amostras\n\n', total_samples - split_idx);
 
-%% 3. Configuração de Hardware (CPU vs GPU)
-fprintf('=============================================\n');
-fprintf('         CONFIGURAÇÃO DE HARDWARE            \n');
-fprintf('=============================================\n');
-% Verificar se existe licença paralela e uma placa gráfica NVIDIA instalada
-if license('test', 'Distrib_Computing_Toolbox') && gpuDeviceCount > 0
-    fprintf('GPU compatível detetada! Aceleração de hardware ativada.\n');
-    fprintf('Algoritmo de treino alterado para Scaled Conjugate Gradient (trainscg).\n\n');
-    use_gpu_flag = 'yes';
-    train_algo = 'trainscg'; % Levenberg-Marquardt não suporta GPU
-else
-    fprintf('Nenhuma GPU detetada (ou falta de Toolbox Paralela).\n');
-    fprintf('Usando processamento normal em CPU com Levenberg-Marquardt (trainlm).\n\n');
-    use_gpu_flag = 'no';
-    train_algo = 'trainlm';
-end
+%% 3. Configuração de Hardware
+fprintf('Algoritmo de treino definido para Levenberg-Marquardt (trainlm).\n\n');
+use_gpu_flag = 'no';
+train_algo = 'trainlm';
 
 %% 4. Definição do Espaço de Otimização
 % Parâmetros: 1) Número de Neurónios, 2) Função de Ativação
