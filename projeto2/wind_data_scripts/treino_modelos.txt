@@ -218,8 +218,7 @@ A avaliar Ponto 7/8 [Neurónios: 20 | Ativação: tansig]:
   -> Treinando modelo  6/30 do Ponto 7 ... Concluído! (Val MSE: 0.6609)
   -> Treinando modelo  7/30 do Ponto 7 ... Concluído! (Val MSE: 0.6510)
   -> Treinando modelo  8/30 do Ponto 7 ... Concluído! (Val MSE: 0.6593)
-  -> Treinando modelo  9/30 do Ponto 7 ... 21  trainPerf = Perfs(1);
-Concluído! (Val MSE: 0.6644)
+  -> Treinando modelo  9/30 do Ponto 7 ... Concluído! (Val MSE: 0.6644)
   -> Treinando modelo 10/30 do Ponto 7 ... Concluído! (Val MSE: 0.6625)
   -> Treinando modelo 11/30 do Ponto 7 ... Concluído! (Val MSE: 0.6630)
   -> Treinando modelo 12/30 do Ponto 7 ... Concluído! (Val MSE: 0.6591)
