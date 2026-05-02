@@ -1,0 +1,134 @@
+Artificial Neural Networks Faculty of Exact Sciences and Engineering 
+Artificial Neural Networks – Assignment 2 (2025/26) 
+Regression task 
+ 
+Objective: 
+This  assignment  addresses  two  regression  problems  using  MATLAB  neural  network 
+algorithms for dynamic modeling, namely FitNet, NARNet and NARXNet. 
+The first dataset contains wind data, created from the wind sensor installed in the Touch 
+Down Zone of Madeira International Airport Runway 05. The dataset contains: 
+• timestamp  
+• wind direction (degrees) 
+• wind speed (m/s) 
+For this dataset, the objective is to build a model that forecasts wind speed one minute 
+into the future. For each instant t, the model shall use information available up to time t to 
+predict the wind speed at time t + 1 minute. 
+The second dataset contains weather station records with the following variables: 
+• Temperature (C)  
+• Apparent Temperature (C)  
+• Humidity  
+• Wind Speed (km/h)  
+• Wind direction (degrees)  
+• Visibility (km)  
+• Cloud Cover  
+• Pressure (millibars)  
+For this dataset, the objective is to build a model that learns to infer apparent temperature 
+from  the  available  weather  measurements.  Apparent  temperature  represents  the 
+temperature as perceived by humans. 
+Students shall explore the functions to create the most appropriate shallow neural network 
+(FitNet, NARNet, NARXNet) and justify the most appropriate modeling choice for each 
+dataset. All architectural and training choices should be selected and justified. At least two 
+hyperparameters must be explored, one of which must be the number of neurons. The 
+search  must  include  at  least  5  points  in  the  optimization  space,  and  each  tested 
+configuration shall be repeated at least 30 times with different random initializations. 
+ 
+ 
+ 
+ 
+ 
+Artificial Neural Networks Faculty of Exact Sciences and Engineering 
+Assignment Steps and Reporting Guidelines 
+Workflow: 
+1. Data acquisition and initial inspection 
+Import both datasets and provide a concise description of the variables, their units, and the 
+temporal coverage. 
+For each dataset, inspect the variables, verify consistency of the measurements, and 
+identify possible missing or anomalous values. Report the number of observations and 
+identify whether there are missing or duplicated timestamps. 
+ 
+2. Exploratory data analysis (EDA) 
+Produce  graphical  and  statistical  summaries  for  both  datasets.  The  minimal 
+analysis shall include: 
+• distribution of wind speed  
+• distribution of wind direction  
+• temporal evolution of both variables  
+• daily and monthly behavior  
+• missing values and suspicious values  
+• outliers or abrupt changes  
+• pairwise relationships between variables  
+ 
+3. Pre-processing and feature engineering 
+Clean faulty observations, handle missing values or time gaps, and scale the input 
+variables when appropriate. 
+Construct  predictors  that  may  improve  the  performance  of  the  models.  Every 
+transformation shall be justified. 
+ 
+4. Chronological data partitioning 
+Divide  each  dataset  into  training,  validation  and  testing  subsets.  For  the  wind 
+forecasting problem, the partitioning shall respect temporal order and avoid leakage of 
+future  information.  For  the  weather  dataset,  students  shall  define  an  appropriate 
+partitioning strategy and justify it. 
+ 
+5. Model definition and training code 
+Implement parameterized training scripts for a single-hidden-layer network. The 
+scripts  shall  accept  hyper-parameters  and  return  performance  metrics.  Choose 
+between mean squared error, mean absolute error and coefficient of determination (R²) 
+on the validation block. 
+Artificial Neural Networks Faculty of Exact Sciences and Engineering 
+ 
+6. Hyperparameter search 
+Define appropriate search spaces and perform an exploration using at least two 
+hyperparameters. One of them must be the number of neurons. 
+The search shall include at least 5 optimization points. Each configuration shall be 
+run at least 30 times (Central Limit Theorem) with different random initializations, and 
+all outcomes shall be recorded for later analysis. 
+ 
+7. Final evaluation 
+For each dataset, select the best configuration according to the chosen validation 
+criterion. Retrain the selected model using the appropriate data and evaluate it on the 
+held-out test dataset. 
+Present relevant visualizations and a concise numerical summary of the results, 
+including the variability observed across repetitions. Final evaluation metrics shall be 
+reported in the original unit of the target variable, namely: 
+• m/s for wind speed  
+• °C for apparent temperature 
+ 
+8. Discussion and conclusions 
+Provide a concise discussion of the results obtained, comparing the two datasets 
+and the corresponding machine learning approaches. Comment on the overall behavior 
+of the models, the main differences found between the two problems, and the reasons 
+that may justify the choice of one algorithm over the other in each case. The conclusion 
+should summarize the main findings of the work and the main lessons learned from the 
+full modeling pipeline. 
+ 
+ 
+Final Deliverables 
+1. Comprehensive Report in English (IEEE template, maximum 10 pages) 
+o Introduction — overview of the data sets and objectives. 
+o Methodology  — detailed  description  of  each processing  step,  including 
+annotated code snippets, figures and interpretations. 
+o Results  —  summary  of  findings  at  each  stage,  supported  by  visual 
+comparisons and descriptive statistics. 
+o Discussion — appraisal of method effectiveness, challenges encountered 
+and potential enhancements. 
+Artificial Neural Networks Faculty of Exact Sciences and Engineering 
+o Conclusion — synthesis of insights derived from the full pipeline and the 
+anticipated value of engineered features in subsequent modelling. 
+ 
+2. Presentation in English 
+o 10–15 slides (approximately 10 minutes). 
+o Key visualisations (e.g., histograms, correlation matrix, PCA plot). 
+o Principal insights from feature analysis and engineering. 
+o Demonstration of the impact of pre-processing on data quality. 
+ 
+3. ZIP Package 
+The archive shall contain the report, slide deck, all scripts, initial and final weight 
+files, and saved figures for every experiment. 
+ 
+Submission Details 
+The ZIP archive must be emailed to trabalhos@uma.pt  no later than 23:59 on 04 May 2026 
+(hard deadline). A brief oral presentation of the work will take place starting on 06 May 2026. 
+After submitting it, forward the email to: 
+• morgado@staff.uma.pt 
+• decio.alves@staff.uma.pt 
+ 
