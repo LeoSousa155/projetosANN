@@ -70,6 +70,11 @@ end
 %% 3. Tratamento de Valores em Falta (NaN)
 fprintf('\n--- Verificação de Qualidade Pós-Separação ---\n');
 
+% Garantir que a Velocidade é numérica (pode ter sido lida como string caso haja caracteres estranhos)
+if ~isnumeric(data.WindSpeed)
+    data.WindSpeed = str2double(string(data.WindSpeed));
+end
+
 nanSpeed = sum(isnan(data.WindSpeed));
 nanDir = sum(isnan(data.WindDirection));
 

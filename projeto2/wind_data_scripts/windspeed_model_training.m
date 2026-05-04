@@ -144,48 +144,9 @@ title('Comparação de Hiperparâmetros (Média e Desvio Padrão em 30 Execuçõ
 grid on;
 hold off;
 
-%% 7. Treino do Modelo Final e Avaliação com MAE
-% Descobrir o melhor ponto da tabela
-[~, best_idx] = min(mean_mse_val);
-best_config = opt_space(best_idx);
-
+%% 7. Fim da Exploração e Otimização
 fprintf('\n=============================================\n');
-fprintf('         TREINO DO MODELO FINAL (BEST)       \n');
-fprintf('=============================================\n');
-fprintf('Melhor Ponto: %d (Neurónios: %d, Ativação: %s)\n', ...
-    best_idx, best_config.neurons, best_config.activation);
-fprintf('A treinar modelo definitivo e a abrir janela (Show Window)...\n');
-
-final_net = fitnet(best_config.neurons, train_algo);
-final_net.layers{1}.transferFcn = best_config.activation;
-final_net.trainParam.max_fail = 10;
-final_net.performFcn = 'mse';
-final_net.divideFcn = 'divideblock';
-final_net.divideParam.trainRatio = 0.85; 
-final_net.divideParam.valRatio   = 0.15;
-final_net.divideParam.testRatio  = 0.00;
-
-% ATIVAR JANELA para captura dos gráficos (Curvas de Treino, Error Histogram, etc)
-final_net.trainParam.showWindow = true;
-
-% Treinar na fatia de otimização inteira
-[final_net, final_tr] = train(final_net, inputs_tv, targets_tv, 'useGPU', use_gpu_flag);
-
-%% 8. Avaliação Cega no Cofre (Test Set)
-fprintf('\n=============================================\n');
-fprintf('         AVALIAÇÃO FINAL (TEST SET)          \n');
-fprintf('=============================================\n');
-
-% Extrair previsões dos dados que a rede NUNCA viu
-final_preds = final_net(inputs_test);
-
-% Reverter a transformação logarítmica (expm1) para voltar a m/s
-final_preds_ms = expm1(final_preds);
-targets_test_ms = expm1(targets_test);
-
-% Calcular o MAE puramente no Test Set em unidades originais
-final_mae = mae(targets_test_ms - final_preds_ms);
-
-fprintf('Métrica Final para o Relatório:\n');
-fprintf('=> MAE (Mean Absolute Error) Cego: %.4f m/s\n', final_mae);
+fprintf('  O treino do modelo final foi separado para o script:\n');
+fprintf('  "windspeed_final_model.m" para garantir reprodutibilidade\n');
+fprintf('  e permitir o armazenamento dos pesos iniciais e finais.\n');
 fprintf('=============================================\n');

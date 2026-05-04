@@ -386,39 +386,9 @@ title('Comparação de Hiperparâmetros (Média e Desvio Padrão em 30 Execuçõ
 grid on;
 hold off;
 
-%% 10 - Treino do Modelo Final (Best Configuration)
-[~, best_idx] = min(mean_mse_val);
-best_config = opt_space(best_idx);
-
+%% 10 - Fim da Exploração e Otimização
 fprintf('\n=============================================\n');
-fprintf('         TREINO DO MODELO FINAL (BEST)       \n');
-fprintf('=============================================\n');
-fprintf('Melhor Ponto: %d (Neurónios: %d, Ativação: %s)\n', best_idx, best_config.neurons, best_config.activation);
-fprintf('A treinar modelo definitivo e a abrir janela (Show Window)...\n');
-
-final_net = fitnet(best_config.neurons, train_algo);
-final_net.layers{1}.transferFcn = best_config.activation;
-final_net.inputs{1}.processFcns = {'removeconstantrows','mapminmax'};
-final_net.outputs{2}.processFcns = {'removeconstantrows','mapminmax'};
-final_net.trainParam.max_fail = 10;
-final_net.performFcn = 'mse';
-final_net.divideFcn = 'dividerand';
-final_net.divideParam.trainRatio = 0.85; 
-final_net.divideParam.valRatio   = 0.15;
-final_net.divideParam.testRatio  = 0.00;
-
-final_net.trainParam.showWindow = true; % ATIVAR JANELA NO ÚLTIMO MODELO
-
-[final_net, final_tr] = train(final_net, inputs_tv, targets_tv, 'useGPU', use_gpu_flag);
-
-%% 11 - Avaliação Cega no Cofre (Test Set com MAE)
-fprintf('\n=============================================\n');
-fprintf('         AVALIAÇÃO FINAL (TEST SET)          \n');
-fprintf('=============================================\n');
-
-final_preds = final_net(inputs_test);
-final_mae = mae(targets_test - final_preds);
-
-fprintf('Métrica Final para o Relatório:\n');
-fprintf('=> MAE (Mean Absolute Error) Cego: %.4f\n', final_mae);
+fprintf('  O treino do modelo final foi separado para o script:\n');
+fprintf('  "weatherStation_final_model.m" para garantir reprodutibilidade\n');
+fprintf('  e permitir o armazenamento dos pesos iniciais e finais.\n');
 fprintf('=============================================\n');
