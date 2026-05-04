@@ -183,6 +183,13 @@ fprintf('Linhas removidas (sem 1 min de futuro conhecido): %d\n', linhas_antes -
 fprintf('Dataset final pronto com %d observações.\n', linhas_depois);
 fprintf('---------------------------------------------\n');
 
+%% 6.5 Transformação Logarítmica (Preparação para o Modelo)
+fprintf('\n--- Transformação Logarítmica (Right Skew) ---\n');
+fprintf('Aplicando log1p() a WindSpeed e Target_WindSpeed...\n');
+data.WindSpeed = log1p(data.WindSpeed);
+data.Target_WindSpeed = log1p(data.Target_WindSpeed);
+fprintf('---------------------------------------------\n');
+
 %% 7. Resumo dos Blocos e Exportação
 % Identificar os maiores blocos (mais úteis para treino)
 stats = groupsummary(data, 'BlockID');

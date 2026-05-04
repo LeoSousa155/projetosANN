@@ -32,7 +32,7 @@ subplot(3,1,1);
 histogram(data.WindSpeed, 'NumBins', 50, 'FaceColor', [0 0.4470 0.7410], 'EdgeColor', 'w');
 set(gca, 'YScale', 'log'); 
 title('Wind Speed Distribution (Log Scale)');
-xlabel('Wind Speed (m/s)'); ylabel('Frequency (Log)'); grid on;
+xlabel('Wind Speed (log(1 + m/s))'); ylabel('Frequency (Log)'); grid on;
 
 subplot(3,1,2);
 histogram(data.WindDirection, 'FaceColor', [0.8500 0.3250 0.0980], 'EdgeColor', 'w');
@@ -77,11 +77,58 @@ heatmap(vars_display, vars_display, corr_matrix, 'Title', 'Correlation Matrix');
 figure('Name', 'Scatter Plots vs Target', 'NumberTitle', 'off', 'Position', [250, 250, 1200, 800]);
 scatter_vars = {'WindSpeed', 'Dir_Sin', 'Dir_Cos', 'Hour_Sin', 'Hour_Cos', 'Wind_Acc'};
 titles = {'Current Wind Speed', 'Direction Sine', 'Direction Cosine', 'Hour Sine', 'Hour Cosine', 'Wind Acceleration'};
-x_labels = {'Wind Speed (m/s)', 'Sin(\theta)', 'Cos(\theta)', 'Sin(Hour)', 'Cos(Hour)', 'Acceleration (m/s^2)'};
+x_labels = {'Wind Speed (log(1 + m/s))', 'Sin(\theta)', 'Cos(\theta)', 'Sin(Hour)', 'Cos(Hour)', 'Acceleration (m/s^2)'};
 
 for i = 1:6
     subplot(2, 3, i);
     scatter(data.(scatter_vars{i}), data.Target_WindSpeed, 10, 'filled', 'MarkerFaceAlpha', 0.2);
     title([titles{i} ' vs Target (+60s)']);
-    xlabel(x_labels{i}); ylabel('Target (+60s) (m/s)'); grid on;
+    xlabel(x_labels{i}); ylabel('Target (+60s) (log(1 + m/s))'); grid on;
 end
+
+%% 4. Evolução Temporal de Ambas as Variáveis
+fprintf('Gerando gráficos de evolução temporal...\n');
+figure('Name', 'Temporal Evolution', 'NumberTitle', 'off', 'Position', [300, 100, 1000, 800]);
+
+subplot(3,1,1);
+plot(data.Time, data.WindSpeed, 'Color', [0 0.4470 0.7410]);
+title('Temporal Evolution of Wind Speed');
+xlabel('Time'); ylabel('Wind Speed (log(1 + m/s))'); grid on;
+
+subplot(3,1,2);
+plot(data.Time, data.WindDirection, '.', 'Color', [0.8500 0.3250 0.0980], 'MarkerSize', 2);
+title('Temporal Evolution of Wind Direction');
+xlabel('Time'); ylabel('Wind Direction (Degrees)'); grid on;
+
+subplot(3,1,3);
+plot(data.Time, data.Wind_Acc, 'Color', [0.4940 0.1840 0.5560]);
+title('Abrupt Changes (Wind Acceleration \Delta v over Time)');
+xlabel('Time'); ylabel('Acceleration (m/s^2)'); grid on;
+
+%% 5. Comportamento Diário, Mensal e Outliers
+fprintf('Gerando gráficos de comportamento diário, mensal e outliers...\n');
+figure('Name', 'Boxplots: Outliers, Daily and Monthly', 'NumberTitle', 'off', 'Position', [350, 150, 1200, 450]);
+
+subplot(1,3,1);
+boxplot(data.WindSpeed);
+title('Outliers Identification (Overall)');
+ylabel('Wind Speed (log(1 + m/s))'); grid on;
+
+subplot(1,3,2);
+boxplot(data.WindSpeed, hour(data.Time));
+title('Daily Behavior (Wind Speed Distribution per Hour)');
+xlabel('Hour of the Day (0-23)'); ylabel('Wind Speed (log(1 + m/s))'); grid on;
+
+subplot(1,3,3);
+boxplot(data.WindSpeed, month(data.Time));
+title('Monthly Behavior (Wind Speed Distribution per Month)');
+xlabel('Month of the Year (1-12)'); ylabel('Wind Speed (log(1 + m/s))'); grid on;
+
+%% 6. Relação aos Pares Adicional (Wind Speed vs Direction)
+fprintf('Gerando relação aos pares extra (Speed vs Direction)...\n');
+figure('Name', 'Pairwise: Speed vs Direction', 'NumberTitle', 'off', 'Position', [500, 300, 700, 500]);
+scatter(data.WindDirection, data.WindSpeed, 5, 'filled', 'MarkerFaceAlpha', 0.1, 'MarkerFaceColor', [0.25 0.25 0.25]);
+title('Pairwise Relationship: Wind Speed vs Wind Direction');
+xlabel('Wind Direction (Degrees)'); ylabel('Wind Speed (log(1 + m/s))');
+grid on;
+fprintf('=============================================\n');

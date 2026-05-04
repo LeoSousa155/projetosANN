@@ -179,8 +179,12 @@ fprintf('=============================================\n');
 % Extrair previsões dos dados que a rede NUNCA viu
 final_preds = final_net(inputs_test);
 
-% Calcular o MAE puramente no Test Set conforme pedido no enunciado
-final_mae = mae(targets_test - final_preds);
+% Reverter a transformação logarítmica (expm1) para voltar a m/s
+final_preds_ms = expm1(final_preds);
+targets_test_ms = expm1(targets_test);
+
+% Calcular o MAE puramente no Test Set em unidades originais
+final_mae = mae(targets_test_ms - final_preds_ms);
 
 fprintf('Métrica Final para o Relatório:\n');
 fprintf('=> MAE (Mean Absolute Error) Cego: %.4f m/s\n', final_mae);

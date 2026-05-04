@@ -165,7 +165,7 @@ data.Wind_Chill_Effect = data.WindSpeed_km_h_ .* data.Temperature_C_;
 % 2. Interação Humidade e Pressão (Densidade/Estabilidade do ar)
 data.Hum_Press_Ratio = data.Humidity .* data.Pressure_millibars_;
 
-%% 5 - Normalização dos Dados
+%% 5 - Separação de Features e Target
 
 targetName = 'ApparentTemperature_C_';
 inputNames = setdiff(data.Properties.VariableNames, targetName, 'stable');
